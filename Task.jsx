@@ -6,7 +6,6 @@ Task = React.createClass({
   },
 
   toggleChecked() {
-	this.props.task;
 	this.props.task.set( 'checked', ! this.props.task.checked );
 	this.props.task.save();
   },
@@ -16,7 +15,6 @@ Task = React.createClass({
   },
 
   togglePrivate() {
-	this.props.task;
 	this.props.task.set( 'private', ! this.props.task.private );
 	this.props.task.save();
   },
