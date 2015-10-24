@@ -20,8 +20,8 @@ App = React.createClass({
     }
 
     return {
-      tasks: Tasks.find(query, {sort: {createdAt: -1}}).fetch(),
-      incompleteCount: Tasks.find({checked: {$ne: true}}).count(),
+      tasks: astroTask.find(query, {sort: {createdAt: -1}}).fetch(),
+      incompleteCount: astroTask.find({checked: {$ne: true}}).count(),
       currentUser: Meteor.user()
     };
   },
@@ -43,12 +43,13 @@ App = React.createClass({
     event.preventDefault();
 
     // Find the text field via the React ref
-    var text = React.findDOMNode(this.refs.textInput).value.trim();
+    let input = React.findDOMNode(this.refs.textInput);
 
-    Meteor.call("addTask", text);
+	let task = new astroTask();
+	task.set( 'text', input.value.trim() );
+	task.save();
 
-    // Clear form
-    React.findDOMNode(this.refs.textInput).value = "";
+    input.value = "";
   },
 
   toggleHideCompleted() {
